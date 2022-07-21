@@ -1,0 +1,15 @@
+#pragma once
+
+const char *ssid1 = "";
+const char *password1 = "";
+const char *ssid2 = "";
+const char *password2 = "";
+
+const char *ota_password = "";
+
+const char *device_name     = "ambientikamqtt";
+const char *mqtt_server     = "";
+const char *mqtt_user       = "";
+const char *mqtt_pw         = "";
+
+#define MQTT_TOPIC_BASE "home/room"
