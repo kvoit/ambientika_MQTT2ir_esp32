@@ -2,7 +2,7 @@
 MQTT-to-IR bridge to controll Südwind Ambientika with an ESP32
 
 ## Hardware
-This software uses the builtin RMT of the ESP32, configured to GPIO 16. IR LED must be driven over a transistor. For me, multiple hundreds of mA were required to bridge a distance of about 3m.
+This software uses the builtin RMT of the ESP32, configured to GPIO 16. IR LED must be driven over a transistor. ~For me, multiple hundreds of mA were required to bridge a distance of about 3m.~ (<- This remark was probably due to a faulty MOSFET in my only device.)
 
 ## Flash
 Copy `src/BaseConfig.h.example` to `src/BaseConfig.h` and fill out fields. Flash with PlatformIO
