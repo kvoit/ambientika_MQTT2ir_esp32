@@ -19,7 +19,7 @@ Supported modes in topic MQTT_TOPIC_BASE/ambientika/mode/set:
 - "Night"
 - "Boost"
 
-Supported levels in topic MQTT_TOPIC_BASE/ambientika/mode/set:
+Supported levels in topic MQTT_TOPIC_BASE/ambientika/level/set:
 - "1"
 - "2"
 - "3"
