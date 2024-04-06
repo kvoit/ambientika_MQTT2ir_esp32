@@ -26,8 +26,7 @@ void setup(void) {
   if(!startNetwork(ssid1,password1,device_name))
     startNetwork(ssid2,password2,device_name);
 
-  // Start network services
-  startOTA(device_name, ota_password);
+E  startOTA(device_name, ota_password);
   beginRemoteDebug(device_name);
   
   // Wait for debug connections
@@ -45,11 +44,31 @@ void setup(void) {
   pubsubclient.setCallback(mqtt_callback_func);
 
   mqttir.begin();
+
+  const char* mac = WiFi.macAddress().c_str();
+  const char device_id[] = {*(mac+0), *(mac+1), *(mac+3), *(mac+4), *(mac+6), *(mac+7), *(mac+9), *(mac+10), *(mac+12), *(mac+13), *(mac+15), *(mac+16), '\0'};
+  mqttir.homeassistantDiscover("luefter_bedroom", &device_id[6]);
 }
 
 void loop() {
-  ArduinoOTA.handle();
-  Debug.handle();
-  mqtt_controller.handle();
+  if(WiFi.status() == WL_CONNECTED) {
+    ArduinoOTA.handle();
+    Debug.handle();
+
+    mqtt_controller.handle();
+  }
+  INTERVAL(1000,millis()) {
+    if(WiFi.status() != WL_CONNECTED) {
+      WiFi.disconnect();
+      WiFi.reconnect();
+
+      if(WiFi.status() == WL_CONNECTED) {
+        delay(60000);
+        ESP.restart();
+      }
+    }
+    Serial.print("+");
+  }
+
   mqttir.handle();
 }

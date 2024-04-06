@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 #include <PubSubClient.h>
 #include <MqttController.hpp>
 #include <MqttIR.hpp>
@@ -15,6 +16,7 @@ enum AmbientikaMode : uint8_t {
     Watch,
     Night,
     Boost,
+    Reset,
     AmbientikaModeLAST_ENTRY
 };
 static const char* AmbientikaMode_s[AmbientikaMode::AmbientikaModeLAST_ENTRY] = {
@@ -27,6 +29,7 @@ static const char* AmbientikaMode_s[AmbientikaMode::AmbientikaModeLAST_ENTRY] = 
     "Watch",
     "Night",
     "Boost",
+    "Reset",
 };
 static const char* AmbientikaMode_v[AmbientikaMode::AmbientikaModeLAST_ENTRY] = {
     "966954AB",
@@ -38,6 +41,7 @@ static const char* AmbientikaMode_v[AmbientikaMode::AmbientikaModeLAST_ENTRY] = 
     "9669946B",
     "9669F20D",
     "966912ED",
+    "966902FD",
 };
 
 enum AmbientikaHumLevel : uint8_t { 
@@ -87,7 +91,7 @@ public:
 
     virtual bool presentMessage(const char *topic,const char *payload);
 
-    void homeassistantDiscover(const char *name, const char *unique_id) {};
+    virtual bool homeassistantDiscover(const char *name, const char *unique_id);
 
 
 protected:
